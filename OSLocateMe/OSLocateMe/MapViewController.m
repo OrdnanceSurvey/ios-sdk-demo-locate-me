@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  MapViewController.m
 //  OSLocateMe
 //
 //  Created by rmurray on 02/10/2012.
@@ -26,9 +26,9 @@
     {
         //create web tile source with API details
         id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
-        
-        _mapView.delegate = self; 
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
+        
+        _mapView.delegate = self;
         _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     }
     
@@ -80,7 +80,7 @@
 {
     NSLog(@"%s %d %d", __PRETTY_FUNCTION__, mode, animated);
     
-    //do nothing
+    //do nothing with this delegate method
 
 }
 

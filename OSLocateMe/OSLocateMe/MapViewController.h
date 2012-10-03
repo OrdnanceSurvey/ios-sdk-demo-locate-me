@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MapViewController.h
 //  OSLocateMe
 //
 //  Created by rmurray on 02/10/2012.
