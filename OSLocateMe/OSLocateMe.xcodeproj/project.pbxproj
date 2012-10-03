@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F37D194161C3388000F8EA6 /* OSMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F37D193161C3388000F8EA6 /* OSMap.framework */; };
 		5F88773A161B15DC00ECDDBB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F887739161B15DC00ECDDBB /* UIKit.framework */; };
 		5F88773C161B15DC00ECDDBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88773B161B15DC00ECDDBB /* Foundation.framework */; };
 		5F88773E161B15DC00ECDDBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88773D161B15DC00ECDDBB /* CoreGraphics.framework */; };
@@ -17,10 +18,14 @@
 		5F88774E161B15DC00ECDDBB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F88774D161B15DC00ECDDBB /* Default@2x.png */; };
 		5F887750161B15DC00ECDDBB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F88774F161B15DC00ECDDBB /* Default-568h@2x.png */; };
 		5F887753161B15DC00ECDDBB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F887751161B15DC00ECDDBB /* MainStoryboard.storyboard */; };
-		5F887756161B15DC00ECDDBB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F887755161B15DC00ECDDBB /* ViewController.m */; };
+		5F887756161B15DC00ECDDBB /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F887755161B15DC00ECDDBB /* MapViewController.m */; };
+		5F88775D161B161700ECDDBB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88775C161B161700ECDDBB /* libsqlite3.dylib */; };
+		5F88775F161B161F00ECDDBB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88775E161B161F00ECDDBB /* CoreLocation.framework */; };
+		5F887761161B162600ECDDBB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F887760161B162600ECDDBB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F37D193161C3388000F8EA6 /* OSMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSMap.framework; path = ../StaticFrameworks/OSMap.framework; sourceTree = "<group>"; };
 		5F887735161B15DC00ECDDBB /* OSLocateMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSLocateMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F887739161B15DC00ECDDBB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5F88773B161B15DC00ECDDBB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -35,8 +40,11 @@
 		5F88774D161B15DC00ECDDBB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		5F88774F161B15DC00ECDDBB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5F887752161B15DC00ECDDBB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5F887754161B15DC00ECDDBB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5F887755161B15DC00ECDDBB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5F887754161B15DC00ECDDBB /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		5F887755161B15DC00ECDDBB /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		5F88775C161B161700ECDDBB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		5F88775E161B161F00ECDDBB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5F887760161B162600ECDDBB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,9 +52,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F887761161B162600ECDDBB /* QuartzCore.framework in Frameworks */,
+				5F88775F161B161F00ECDDBB /* CoreLocation.framework in Frameworks */,
+				5F88775D161B161700ECDDBB /* libsqlite3.dylib in Frameworks */,
 				5F88773A161B15DC00ECDDBB /* UIKit.framework in Frameworks */,
 				5F88773C161B15DC00ECDDBB /* Foundation.framework in Frameworks */,
 				5F88773E161B15DC00ECDDBB /* CoreGraphics.framework in Frameworks */,
+				5F37D194161C3388000F8EA6 /* OSMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +85,10 @@
 		5F887738161B15DC00ECDDBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F37D193161C3388000F8EA6 /* OSMap.framework */,
+				5F887760161B162600ECDDBB /* QuartzCore.framework */,
+				5F88775E161B161F00ECDDBB /* CoreLocation.framework */,
+				5F88775C161B161700ECDDBB /* libsqlite3.dylib */,
 				5F887739161B15DC00ECDDBB /* UIKit.framework */,
 				5F88773B161B15DC00ECDDBB /* Foundation.framework */,
 				5F88773D161B15DC00ECDDBB /* CoreGraphics.framework */,
@@ -86,8 +102,8 @@
 				5F887748161B15DC00ECDDBB /* AppDelegate.h */,
 				5F887749161B15DC00ECDDBB /* AppDelegate.m */,
 				5F887751161B15DC00ECDDBB /* MainStoryboard.storyboard */,
-				5F887754161B15DC00ECDDBB /* ViewController.h */,
-				5F887755161B15DC00ECDDBB /* ViewController.m */,
+				5F887754161B15DC00ECDDBB /* MapViewController.h */,
+				5F887755161B15DC00ECDDBB /* MapViewController.m */,
 				5F887740161B15DC00ECDDBB /* Supporting Files */,
 			);
 			path = OSLocateMe;
@@ -175,7 +191,7 @@
 			files = (
 				5F887746161B15DC00ECDDBB /* main.m in Sources */,
 				5F88774A161B15DC00ECDDBB /* AppDelegate.m in Sources */,
-				5F887756161B15DC00ECDDBB /* ViewController.m in Sources */,
+				5F887756161B15DC00ECDDBB /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +269,10 @@
 		5F88775A161B15DC00ECDDBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../StaticFrameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OSLocateMe/OSLocateMe-Prefix.pch";
 				INFOPLIST_FILE = "OSLocateMe/OSLocateMe-Info.plist";
@@ -264,6 +284,10 @@
 		5F88775B161B15DC00ECDDBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../StaticFrameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OSLocateMe/OSLocateMe-Prefix.pch";
 				INFOPLIST_FILE = "OSLocateMe/OSLocateMe-Info.plist";
@@ -291,6 +315,7 @@
 				5F88775B161B15DC00ECDDBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

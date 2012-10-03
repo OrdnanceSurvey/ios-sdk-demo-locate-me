@@ -1,18 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="2" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdD-RS-TzJ" customClass="OSMapView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZd-RT-6b0">
+                                <color key="backgroundColor" red="0.043478251000000002" green="0.043478251000000002" blue="0.043478251000000002" alpha="0.69999999000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="peS-AQ-ndr"/>
+                                </constraints>
+                                <string key="text">/*
+ * Lat,Lng: -,-
+ * E,N: -,-
+ * Grid Ref: - - -
+*/</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRf-Na-MKj">
+                                <items>
+                                    <barButtonItem title="Locate Me" id="L5P-GP-2UI">
+                                        <connections>
+                                            <action selector="locateMeTapped:" destination="2" id="8HC-tw-sk7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SRf-Na-MKj" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="9Al-kS-aSw"/>
+                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="bottom" secondItem="SRf-Na-MKj" secondAttribute="top" type="default" id="KNe-Bk-F1T"/>
+                            <constraint firstItem="nZd-RT-6b0" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="Oxc-O5-Pqs"/>
+                            <constraint firstItem="nZd-RT-6b0" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="QMq-99-7aM"/>
+                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-20" id="Som-YC-9SV"/>
+                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Xwr-3K-fp2"/>
+                            <constraint firstItem="nZd-RT-6b0" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="ZhJ-PD-f4j"/>
+                            <constraint firstItem="SRf-Na-MKj" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="bjA-LT-GTu"/>
+                            <constraint firstItem="SRf-Na-MKj" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="oSJ-EA-g37"/>
+                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="tuV-2C-h6G"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="locateMeBtn" destination="L5P-GP-2UI" id="jMs-kT-nmP"/>
+                        <outlet property="mapView" destination="fdD-RS-TzJ" id="966-5y-d4j"/>
+                        <outlet property="textView" destination="nZd-RT-6b0" id="w7F-xW-HZe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
