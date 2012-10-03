@@ -4,7 +4,7 @@ Description
 A demo app using the iOS Openspace SDK to display the user's location to make use of location services.
 
 
-![ScreenShot](https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me/blob/master/screenshot.png "Screenshot of OSLocateMe app")
+![ScreenShot](screenshot.png "Screenshot of OSLocateMe app")
 
 Getting started
 ---
@@ -12,7 +12,7 @@ Getting started
 
 #### Register for an OS OpenSpace API Key
 
-Developers will need to register and obtain an API Key for one of the [OS OpenSpace services](http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/) in order to access the mapping service.
+Developers will need to register and obtain an API Key for one of the [OS OpenSpace services](http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/) in order to access the web mapping source.
 
 #### Clone project
 
@@ -29,7 +29,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
  </pre>
  
 
-#### Update demo app with API Key
+#### Update demo app with your API Key
 
 Copy and paste the API Key and associated URL into the demo app
 
