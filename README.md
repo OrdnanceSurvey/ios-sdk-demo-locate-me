@@ -4,7 +4,7 @@ Description
 A demo app using the iOS Openspace SDK to display the user's location to make use of location services.
 
 
-![ScreenShot](./ios-sdk-demo-locate-me/screenshot.png "Screenshot of OSLocateMe app")
+![ScreenShot](https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me/blob/master/screenshot.png "Screenshot of OSLocateMe app")
 
 Getting started
 ---
