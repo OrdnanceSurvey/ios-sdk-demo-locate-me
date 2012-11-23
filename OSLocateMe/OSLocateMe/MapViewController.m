@@ -8,11 +8,14 @@
 
 #import "MapViewController.h"
 
-#define kOS_API_KEY @"YOUR_KEY_HERE"
-#define kOS_URL @"YOUR_URL_HERE"
+#define kOS_API_KEY @"KEY_HERE"
+#define kOS_URL @"URL_HERE"
 #define kIS_PRO FALSE
 
 @interface MapViewController () <OSMapViewDelegate, UISearchBarDelegate>
+{
+    OSGeocoder * osGeocoder;
+}
 
 @end
 
@@ -23,14 +26,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    _searchBar.delegate = self;
+    self.searchBar.delegate = self;
     
     {
         //create web tile source with API details
         id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
-        _mapView.delegate = self;
+        [_mapView setDelegate:self];
+        
         _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     }
     
@@ -41,7 +45,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    _mapView = nil;
+    
+    //stop geocoding and set to nil on receive memory warning
+    if([osGeocoder isGeocoding]){
+        [osGeocoder cancelGeocode];
+    }
+    osGeocoder = nil;
 }
 
 /*
@@ -105,7 +114,9 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     bool showsUserLocation = 1;
-    assert(mv == _mapView && showsUserLocation == _mapView.showsUserLocation);
+    assert(mv == self.mapView && showsUserLocation == _mapView.showsUserLocation);
+    
+    //toggle button style to show selected/not selected
     _locateMeBtn.style = (showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered);
 
 }
@@ -183,7 +194,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    searchBar.text=@"";
+    searchBar.text = @"";
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     
@@ -198,17 +209,35 @@
     
     NSString * searchString = searchBar.text;
     
-    OSGeocodeType type = OSGeocodeTypeCombined;
-    OSGeocoder * geocoder = [[OSGeocoder alloc] initWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
+    //Location of the local geocoder database
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"offlineDB.ospoi" withExtension:nil];
+    NSString *dbPath = [url path];
     
-    [geocoder geocodeString:searchString type:type completionHandler:^(NSArray *placemarks, NSError *error) {
+    //create new instance of OSGeocoder if not one already
+    if(!osGeocoder)
+    {
+        osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
+    }
+    
+    //Select a type
+    OSGeocodeType type = OSGeocodeTypeCombined2;
+    
+    //We need a OSGridRect to search in
+    OSGridRect rect = OSNationalGridBounds;
+    
+    //Pass search args to geocoder with completion handler
+    [osGeocoder geocodeString:searchString type:type inBoundingRect:rect
+            completionHandler:^(NSArray *placemarks, NSError *error) {
         
         [self showAlertForError:error];
         if ([placemarks count])
         {
             [self displaySearchResults:placemarks];
         }
+        
     }];
+    
+
     
 }
 

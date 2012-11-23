@@ -13,12 +13,13 @@
 
 @property (weak, nonatomic) IBOutlet OSMapView *mapView;
 
-- (IBAction)locateMeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *locateMeBtn;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic, getter = isSea) IBOutlet UISearchBar *searchBar;
 
+
+- (IBAction)locateMeTapped:(id)sender;
 
 @end
