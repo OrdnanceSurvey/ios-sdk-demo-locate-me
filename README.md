@@ -5,7 +5,7 @@ A demo app using the iOS Openspace SDK to display the user's location to make us
 
 
 
-![ScreenShot](screenshot.png "Screenshot of OSLocateMe app")
+![ScreenShot](https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me/raw/master/screenshot.png "Screenshot of demo app")
 
 
 Getting started
