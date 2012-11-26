@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic, getter = isSea) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 
 - (IBAction)locateMeTapped:(id)sender;

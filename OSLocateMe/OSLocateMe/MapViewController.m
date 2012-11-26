@@ -8,9 +8,10 @@
 
 #import "MapViewController.h"
 
-#define kOS_API_KEY @"KEY_HERE"
-#define kOS_URL @"URL_HERE"
+#define kOS_API_KEY @"YOUR_KEY_HERE"
+#define kOS_URL @"YOUR_URL_HERE"
 #define kIS_PRO FALSE
+#define kSEARCH_DB_FILENAME @"YOUR_FILENAME.ospoi"
 
 @interface MapViewController () <OSMapViewDelegate, UISearchBarDelegate>
 {
@@ -143,7 +144,7 @@
     
     //update display
     OSGridPoint gp = OSGridPointForCoordinate(userLocation.coordinate);
-    NSString * gridRef = NSStringFromOSGridPoint(gp, 6);
+    NSString * gridRef = NSStringFromOSGridPoint(gp, 4);
     
     //test if point is within GB
     if(!OSGridPointIsWithinBounds(gp))
@@ -198,7 +199,7 @@
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     
-    [_mapView removeAnnotations:_mapView.annotations];
+    [_mapView removeAnnotations: _mapView.annotations];
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -209,8 +210,30 @@
     
     NSString * searchString = searchBar.text;
     
+    //Define search type
+    OSGeocodeType type;
+    
+    //Get the search bar scope... and map to search type
+    NSInteger buttonIndex = searchBar.selectedScopeButtonIndex;
+    switch (buttonIndex)
+    {
+        case 0:
+            type = OSGeocodeTypeRoad;
+            break;
+        case 1:
+            type = OSGeocodeTypeGazetteer;
+            break;
+        case 2:
+            type = OSGeocodeTypePostcode;
+            break;
+        default:
+            type = OSGeocodeTypeCombined2;
+            break;
+    }
+            
+    
     //Location of the local geocoder database
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"offlineDB.ospoi" withExtension:nil];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:kSEARCH_DB_FILENAME withExtension:nil];
     NSString *dbPath = [url path];
     
     //create new instance of OSGeocoder if not one already
@@ -219,10 +242,8 @@
         osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
     }
     
-    //Select a type
-    OSGeocodeType type = OSGeocodeTypeCombined2;
     
-    //We need a OSGridRect to search in
+    //We need a OSGridRect to search in, in this example use the whole country
     OSGridRect rect = OSNationalGridBounds;
     
     //Pass search args to geocoder with completion handler
