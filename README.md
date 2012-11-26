@@ -1,13 +1,23 @@
 Description
 ---
 
-A demo app using the iOS Openspace SDK to display the user's location to make use of location services.
+A demo app using the iOS Openspace SDK to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
+
 
 
 ![ScreenShot](screenshot.png "Screenshot of OSLocateMe app")
 
+
 Getting started
 ---
+
+#### Requirements
+
+This project requires the following points are met:
+
+- Minimum iOS version: 6.0.1
+- Xcode version: 4.5.2
+- iOS Openspace SDK version: 0.5_086
 
 
 #### Register for an OS OpenSpace API Key
@@ -28,12 +38,24 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
  $SRCROOT/StaticFrameworks
  </pre>
  
+#### Download ordnancesurvey-ios-sdk
+
+Build\Download the offline search database - TODO: define this process
+
+Include the database file in your project bundle and edit the filename
+
+<pre>
+//In MapViewController.m
+
+#define kSEARCH_DB_FILENAME @"YOUR_FILENAME.ospoi"
+
+</pre>
 
 #### Update demo app with your API Key
 
 Copy and paste the API Key and associated URL into the demo app
 
-Note: if an OS OpenSpace Pro account then change kIS_PRO to TRUE
+Note: if using an OS OpenSpace Pro account then change kIS_PRO to TRUE
 
 <pre>
 //In MapViewController.m
