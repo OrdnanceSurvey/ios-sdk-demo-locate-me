@@ -8,10 +8,16 @@
 
 #import "MapViewController.h"
 
-#define kOS_API_KEY @"YOUR_KEY_HERE"
-#define kOS_URL @"YOUR_URL_HERE"
-#define kIS_PRO FALSE
-#define kSEARCH_DB_FILENAME @"YOUR_FILENAME.ospoi"
+/*
+ * Define your OS Openspace API KEY details below
+ * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
+ */
+static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
+static NSString *const kOSApiKeyUrl = @"YOUR_API_URL_HERE";
+static BOOL const kOSIsPro = YES;
+static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
+
+
 
 @interface MapViewController () <OSMapViewDelegate, UISearchBarDelegate>
 {
@@ -25,18 +31,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     self.searchBar.delegate = self;
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         [_mapView setDelegate:self];
         
         _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        
+        NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
     }
     
     
@@ -47,10 +54,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    //stop geocoding and set to nil on receive memory warning
-    if([osGeocoder isGeocoding]){
-        [osGeocoder cancelGeocode];
+    if(_mapView.showsUserLocation)
+    {
+        _mapView.showsUserLocation = NO;
     }
+    
+    //This can be recreated when a search is requested
     osGeocoder = nil;
 }
 
@@ -59,7 +68,17 @@
  */
 -(void)displaySearchResults:(NSArray*)placemarks
 {
-    [_mapView removeAnnotations:_mapView.annotations];
+
+    //remove all OSPlacemark annotations
+    for (id<OSAnnotation>annotation in _mapView.annotations) {
+        
+        if ([annotation isKindOfClass:[OSPlacemark class]])
+        {
+            [_mapView removeAnnotation:annotation];
+        }
+        
+    }
+    
     NSArray * searchResults = [placemarks copy];
     [_mapView addAnnotations:searchResults];
 }
@@ -115,7 +134,6 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     bool showsUserLocation = 1;
-    assert(mv == self.mapView && showsUserLocation == _mapView.showsUserLocation);
     
     //toggle button style to show selected/not selected
     _locateMeBtn.style = (showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered);
@@ -126,7 +144,6 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     bool showsUserLocation = 0;
-    assert(mv == _mapView && showsUserLocation == _mapView.showsUserLocation);
     _locateMeBtn.style = (showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered);
 
 }
@@ -135,7 +152,7 @@
 {
     NSLog(@"%s %d %d", __PRETTY_FUNCTION__, mode, animated);
     
-    //do nothing with this delegate method
+    //do nothing with this delegate method at the moment
 
 }
 
@@ -158,7 +175,8 @@
                       "* You are: \r"
                       "* Lat,Lng: %.06f,%.06f \r"
                       "* E,N: %.f,%.f Grid Ref: %@ \r"
-                      "*/",userLocation.coordinate.latitude, userLocation.coordinate.longitude, gp.easting, gp.northing, gridRef];
+                      "*/",userLocation.coordinate.latitude, userLocation.coordinate.longitude,
+                      gp.easting, gp.northing, gridRef];
     
 }
 
@@ -199,7 +217,16 @@
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     
-    [_mapView removeAnnotations: _mapView.annotations];
+    //remove OSPlacemark annotations
+    for (id<OSAnnotation>annotation in _mapView.annotations) {
+        
+        if ([annotation isKindOfClass:[OSPlacemark class]])
+        {
+            [_mapView removeAnnotation:annotation];
+        }
+        
+    }
+    
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -208,7 +235,7 @@
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     
-    NSString * searchString = searchBar.text;
+    NSString * searchString = [searchBar.text copy];
     
     //Define search type
     OSGeocodeType type;
@@ -233,10 +260,10 @@
             
     
     //Location of the local geocoder database
-    NSURL *url = [[NSBundle mainBundle] URLForResource:kSEARCH_DB_FILENAME withExtension:nil];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:kOSSearchDBFilename withExtension:nil];
     NSString *dbPath = [url path];
     
-    //create new instance of OSGeocoder if not one already
+    //create new instance of OSGeocoder if not instance existing already
     if(!osGeocoder)
     {
         osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
@@ -246,8 +273,13 @@
     //We need a OSGridRect to search in, in this example use the whole country
     OSGridRect rect = OSNationalGridBounds;
     
-    //Pass search args to geocoder with completion handler
-    [osGeocoder geocodeString:searchString type:type inBoundingRect:rect
+    NSRange range = {NSNotFound, 0};
+    
+    //Pass search args to geocoder with completion handler block
+    [osGeocoder geocodeString:searchString
+                         type:type
+               inBoundingRect:rect
+                    withRange:range
             completionHandler:^(NSArray *placemarks, NSError *error) {
         
         [self showAlertForError:error];
