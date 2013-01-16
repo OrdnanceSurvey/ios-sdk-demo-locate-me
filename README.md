@@ -17,7 +17,7 @@ This project requires the following points are met:
 
 - Minimum iOS version: 6.0.1
 - Xcode version: 4.5.2
-- iOS Openspace SDK version: 0.5_086
+- iOS Openspace SDK version: 0.5.6_105
 
 
 #### Register for an OS OpenSpace API Key
@@ -32,7 +32,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
 
 #### Download ordnancesurvey-ios-sdk
 
- - Download the latest ordnancesurvey-ios-sdk static framework from [https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk/downloads](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk/downloads) 
+ - Download the latest ordnancesurvey-ios-sdk static framework TBC 
  - Unzip into the project directory root
  <pre>
  $SRCROOT/StaticFrameworks
@@ -47,7 +47,7 @@ Include the database file in your project bundle and edit the filename
 <pre>
 //In MapViewController.m
 
-#define kSEARCH_DB_FILENAME @"YOUR_FILENAME.ospoi"
+static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
 
 </pre>
 
@@ -60,9 +60,9 @@ Note: if using an OS OpenSpace Pro account then change kIS_PRO to TRUE
 <pre>
 //In MapViewController.m
 
-#define kOS_API_KEY @"YOUR_KEY_HERE"
-#define kOS_URL @"YOUR_URL_HERE"
-#define kIS_PRO FALSE
+static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
+static NSString *const kOSApiKeyUrl = @"YOUR_API_URL_HERE";
+static BOOL const kOSIsPro = YES;
 
 </pre>
 
