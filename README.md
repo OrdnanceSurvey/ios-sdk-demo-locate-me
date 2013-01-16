@@ -55,7 +55,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
 
 Copy and paste the API Key and associated URL into the demo app
 
-Note: if using an OS OpenSpace Pro account then change kIS_PRO to TRUE
+Note: if using an OS OpenSpace Pro account then change kOSIsPro to TRUE
 
 <pre>
 //In MapViewController.m
