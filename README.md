@@ -70,6 +70,13 @@ static BOOL const kOSIsPro = YES;
 
 Project can now be built and run - if you're using the simulator dont forget to mock your location to London.
 
+
+Questions and Issues
+-------
+
+If you have any questions or issues with the ordnancesurey-ios-sdk or this demo app then please TODO: url to o-s.co.uk openspace forum
+
+
 License
 -------
 
