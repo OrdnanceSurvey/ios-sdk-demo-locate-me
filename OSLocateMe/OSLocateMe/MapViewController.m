@@ -264,15 +264,34 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     NSString *dbPath = [url path];
     
     //create new instance of OSGeocoder if not instance existing already
-    if(!osGeocoder)
+    if( !osGeocoder )
     {
         osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
     }
     
     
-    //We need a OSGridRect to search in, in this example use the whole country
-    OSGridRect rect = OSNationalGridBounds;
+    //We need a OSGridRect to search in, if we're showing the user location then
+    // get a GridRect close to user, if not then use the whole country
+    OSGridRect rect;
+    if( _mapView.showsUserLocation ){
+        
+        /*
+         * Define how large the local search GridRect will be
+         * Here we will just make a simple square around the users location
+         */
+        static int localSearchDelta = 5000;
+        
+        OSGridPoint sw = OSGridPointForCoordinate(_mapView.userLocation.coordinate);
+        
+        rect = OSGridRectMake(sw.easting - (localSearchDelta/2), sw.northing - (localSearchDelta/2), localSearchDelta, localSearchDelta);
+        
+    }else{
+        
+        rect = OSNationalGridBounds;
+        
+    }
     
+    // define a number (and offset) of results to return
     NSRange range = {NSNotFound, 0};
     
     //Pass search args to geocoder with completion handler block
