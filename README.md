@@ -1,7 +1,7 @@
 Description
 ---
 
-A demo app using the iOS Openspace SDK to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
+A demo app using the ordnancesurvey-ios-sdk to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
 
 
 
@@ -79,16 +79,16 @@ static BOOL const kOSIsPro = YES;
 
 #### Build and run
 
-Project can now be built and run - if you're using the simulator dont forget to mock your location to London.
+Project can now be built and run - if you're using the simulator don't forget to mock your location to London.
 
 
 Questions and Issues
 -------
 
-If you have any questions or issues with the ordnancesurey-ios-sdk or this demo app then please TODO: url to o-s.co.uk openspace forum
+If you have any questions or issues with the ordnancesurvey-ios-sdk or this demo app then please email osopenspacepro@ordnancesurvey.co.uk
 
 
-License
+Licence
 -------
 
 The Ordnance Survey iOS SDK is protected by © Crown copyright – Ordnance
