@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F345ED0171BEFD7000A22B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F345ECF171BEFD7000A22B1 /* SystemConfiguration.framework */; };
 		5F37D194161C3388000F8EA6 /* OSMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F37D193161C3388000F8EA6 /* OSMap.framework */; };
+		5F46A515171D5F3600D719DC /* db.ospoi in Resources */ = {isa = PBXBuildFile; fileRef = 5F46A514171D5F3600D719DC /* db.ospoi */; };
 		5F88773A161B15DC00ECDDBB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F887739161B15DC00ECDDBB /* UIKit.framework */; };
 		5F88773C161B15DC00ECDDBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88773B161B15DC00ECDDBB /* Foundation.framework */; };
 		5F88773E161B15DC00ECDDBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88773D161B15DC00ECDDBB /* CoreGraphics.framework */; };
@@ -25,7 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F345ECF171BEFD7000A22B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5F37D193161C3388000F8EA6 /* OSMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSMap.framework; path = ../StaticFrameworks/OSMap.framework; sourceTree = "<group>"; };
+		5F46A514171D5F3600D719DC /* db.ospoi */ = {isa = PBXFileReference; lastKnownFileType = file; name = db.ospoi; path = ../../Resources/db.ospoi; sourceTree = "<group>"; };
 		5F887735161B15DC00ECDDBB /* OSLocateMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSLocateMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F887739161B15DC00ECDDBB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5F88773B161B15DC00ECDDBB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F345ED0171BEFD7000A22B1 /* SystemConfiguration.framework in Frameworks */,
 				5F887761161B162600ECDDBB /* QuartzCore.framework in Frameworks */,
 				5F88775F161B161F00ECDDBB /* CoreLocation.framework in Frameworks */,
 				5F88775D161B161700ECDDBB /* libsqlite3.dylib in Frameworks */,
@@ -85,6 +90,7 @@
 		5F887738161B15DC00ECDDBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F345ECF171BEFD7000A22B1 /* SystemConfiguration.framework */,
 				5F37D193161C3388000F8EA6 /* OSMap.framework */,
 				5F887760161B162600ECDDBB /* QuartzCore.framework */,
 				5F88775E161B161F00ECDDBB /* CoreLocation.framework */,
@@ -112,6 +118,7 @@
 		5F887740161B15DC00ECDDBB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5F46A514171D5F3600D719DC /* db.ospoi */,
 				5F887741161B15DC00ECDDBB /* OSLocateMe-Info.plist */,
 				5F887742161B15DC00ECDDBB /* InfoPlist.strings */,
 				5F887745161B15DC00ECDDBB /* main.m */,
@@ -179,6 +186,7 @@
 				5F88774E161B15DC00ECDDBB /* Default@2x.png in Resources */,
 				5F887750161B15DC00ECDDBB /* Default-568h@2x.png in Resources */,
 				5F887753161B15DC00ECDDBB /* MainStoryboard.storyboard in Resources */,
+				5F46A515171D5F3600D719DC /* db.ospoi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
