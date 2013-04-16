@@ -13,9 +13,9 @@
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
 static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
-static NSString *const kOSApiKeyUrl = @"YOUR_API_URL_HERE";
+static NSString *const kOSAppleAppId = @"YOUR_APPLE_APP_ID";
 static BOOL const kOSIsPro = YES;
-static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
+static NSString *const kOSSearchDBFilename = @"db.ospoi";
 
 
 
@@ -36,7 +36,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey appleId:kOSAppleAppId openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         [_mapView setDelegate:self];
@@ -54,12 +54,18 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    if(_mapView.showsUserLocation)
+    //Stop tracking user location
+    if( _mapView.showsUserLocation )
     {
         _mapView.showsUserLocation = NO;
     }
     
-    //This can be recreated when a search is requested
+    //This can be recreated when a search is requested and cancel a request if isGeocoding
+    if( osGeocoder && [osGeocoder isGeocoding] ){
+        
+        [osGeocoder cancelGeocode];
+        
+    }
     osGeocoder = nil;
 }
 
@@ -70,9 +76,9 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
 {
 
     //remove all OSPlacemark annotations
-    for (id<OSAnnotation>annotation in _mapView.annotations) {
+    for ( id<OSAnnotation>annotation in _mapView.annotations ) {
         
-        if ([annotation isKindOfClass:[OSPlacemark class]])
+        if ( [annotation isKindOfClass:[OSPlacemark class]] )
         {
             [_mapView removeAnnotation:annotation];
         }
@@ -88,14 +94,14 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
  */
 -(void)showAlertForError:(NSError*)error
 {
-    if (!error)
+    if ( !error )
     {
         return;
     }
     NSString * errorTitle = nil;
     NSString * errorMessage = nil;
 
-    if ([error.domain isEqualToString:OSGeocoderErrorDomain])
+    if ( [error.domain isEqualToString:OSGeocoderErrorDomain] )
     {
         switch (error.code) {
             case OSGeocoderErrorNoResults:
@@ -108,7 +114,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
         }
     }
     
-    if (!errorTitle)
+    if ( !errorTitle )
     {
         errorTitle = error.localizedDescription;
         errorMessage = error.localizedFailureReason;
@@ -136,7 +142,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     bool showsUserLocation = 1;
     
     //toggle button style to show selected/not selected
-    _locateMeBtn.style = (showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered);
+    _locateMeBtn.style = ( showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered );
 
 }
 -(void)mapViewDidStopLocatingUser:(OSMapView *)mv
@@ -144,7 +150,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     bool showsUserLocation = 0;
-    _locateMeBtn.style = (showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered);
+    _locateMeBtn.style = ( showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered );
 
 }
 
@@ -164,7 +170,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     NSString * gridRef = NSStringFromOSGridPoint(gp, 4);
     
     //test if point is within GB
-    if(!OSGridPointIsWithinBounds(gp))
+    if( !OSGridPointIsWithinBounds(gp) )
     {
         gridRef = @"Invalid";
         gp = OSGridPointInvalid;
@@ -183,14 +189,14 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
 -(OSAnnotationView*)mapView:(OSMapView *)mapView viewForAnnotation:(id<OSAnnotation>)annotation
 {
     // Use the default user location view.
-    if ([annotation isKindOfClass:[OSUserLocation class]])
+    if ( [annotation isKindOfClass:[OSUserLocation class]] )
     {
         return nil;
     }
     
     //differentiate between standard annotion and placemark annotation
     OSPinAnnotationColor pinColor = OSPinAnnotationColorRed;
-    if ([annotation isKindOfClass:[OSPlacemark class]])
+    if ( [annotation isKindOfClass:[OSPlacemark class]] )
     {
         pinColor = OSPinAnnotationColorPurple;
     }
@@ -218,9 +224,9 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     [searchBar resignFirstResponder];
     
     //remove OSPlacemark annotations
-    for (id<OSAnnotation>annotation in _mapView.annotations) {
+    for ( id<OSAnnotation>annotation in _mapView.annotations ) {
         
-        if ([annotation isKindOfClass:[OSPlacemark class]])
+        if ( [annotation isKindOfClass:[OSPlacemark class]] )
         {
             [_mapView removeAnnotation:annotation];
         }
@@ -264,10 +270,20 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
     NSString *dbPath = [url path];
     
     //create new instance of OSGeocoder if not instance existing already
-    if( !osGeocoder )
-    {
+    if( !osGeocoder ){
+        
         osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
+        
+    }else{
+        
+        //OSGeocoder does not support running multiple queries so cancel any that are in progress
+        if( [osGeocoder isGeocoding] )
+        {
+            [osGeocoder cancelGeocode];
+        }
+        
     }
+    
     
     
     //We need a OSGridRect to search in, if we're showing the user location then
@@ -302,7 +318,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
             completionHandler:^(NSArray *placemarks, NSError *error) {
         
         [self showAlertForError:error];
-        if ([placemarks count])
+        if ( [placemarks count] )
         {
             [self displaySearchResults:placemarks];
         }
