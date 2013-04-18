@@ -35,7 +35,9 @@ If you do not own a re-use data licence you can register for an API key to acces
 
 If you own a data licence, for example, you are a member of the PSMA, you can register for an API key to access [OSOnDemand WMTS] (http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-ondemand/pricing.html).
 
-#### Clone project
+#### Download project
+
+Copy the project to your local machine, eg:
 
 <pre>
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
