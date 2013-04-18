@@ -17,7 +17,7 @@ This project requires the following points are met:
 
 - Minimum iOS version: 6.0.1
 - Xcode version: 4.5.2
-- iOS Openspace SDK version: 0.5.6_105
+- iOS Openspace SDK version: TBC
 
 
 #### Register for an API Key
@@ -44,35 +44,45 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
 #### Download ordnancesurvey-ios-sdk
 
  - Download the latest ordnancesurvey-ios-sdk static framework TBC 
- - Unzip into the project directory root
- <pre>
- $SRCROOT/StaticFrameworks
- </pre>
+ - Unzip the SDK into the `StaticFrameworks` directory at the root of the project
+<pre>
+$SRCROOT/StaticFrameworks
+</pre>
  
-#### Download ordnancesurvey-ios-sdk
+#### Build Ordnance Survey POI database
 
-Build\Download the offline search database - TODO: define this process
+This project is configured to use the offline points of interest database containing the following Open datasets:
 
-Include the database file in your project bundle and edit the filename
+- 1:50K Gazetteer
+- OS Locator
+- Codepoint Open datasets
+
+Please follow the guide [here](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk#poi-database) to build the POI database.
+
+Copy the file into the `Resources` directory at the root of the project:
+<pre>
+ $SRCROOT/Resources
+</pre>
+
+The file is referenced in the project settings and defined in the demo application here:
 
 <pre>
 //In MapViewController.m
 
-static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
+static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 </pre>
 
-#### Update demo app with your API Key
+#### Update demo app with your API Key and Bundle Identifier details
 
-Copy and paste the API Key and associated URL into the demo app
+Copy and paste the API Key into the demo app
 
-Note: if using an OS OpenSpace Pro account then change kOSIsPro to TRUE
+Update the Bundle Identifier associated with the API Key
 
 <pre>
 //In MapViewController.m
 
 static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
-static NSString *const kOSApiKeyUrl = @"YOUR_API_URL_HERE";
 static BOOL const kOSIsPro = YES;
 
 </pre>
