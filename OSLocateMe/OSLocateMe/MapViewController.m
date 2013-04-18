@@ -12,10 +12,10 @@
  * Define your OS Openspace API KEY details below
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
-static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
+static NSString *const kOSApiKey = @"IOSSDK03";
 static NSString *const kOSAppleAppId = @"YOUR_APPLE_APP_ID";
 static BOOL const kOSIsPro = YES;
-static NSString *const kOSSearchDBFilename = @"db.ospoi";
+static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 
 
@@ -36,7 +36,7 @@ static NSString *const kOSSearchDBFilename = @"db.ospoi";
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey appleId:kOSAppleAppId openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSAppleAppId openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         [_mapView setDelegate:self];
@@ -61,7 +61,7 @@ static NSString *const kOSSearchDBFilename = @"db.ospoi";
     }
     
     //This can be recreated when a search is requested and cancel a request if isGeocoding
-    if( osGeocoder && [osGeocoder isGeocoding] ){
+    if( osGeocoder && [osGeocoder isGeocoder] ){
         
         [osGeocoder cancelGeocode];
         
@@ -266,7 +266,7 @@ static NSString *const kOSSearchDBFilename = @"db.ospoi";
             
     
     //Location of the local geocoder database
-    NSURL *url = [[NSBundle mainBundle] URLForResource:kOSSearchDBFilename withExtension:nil];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:kOSPoiDBFilename withExtension:nil];
     NSString *dbPath = [url path];
     
     //create new instance of OSGeocoder if not instance existing already
@@ -277,7 +277,7 @@ static NSString *const kOSSearchDBFilename = @"db.ospoi";
     }else{
         
         //OSGeocoder does not support running multiple queries so cancel any that are in progress
-        if( [osGeocoder isGeocoding] )
+        if( [osGeocoder isGeocoder] )
         {
             [osGeocoder cancelGeocode];
         }
