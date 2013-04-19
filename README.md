@@ -20,16 +20,24 @@ This project requires the following points are met:
 - iOS Openspace SDK version: TBC
 
 
-#### Register for an API Key
+### Register for an API Key
 
-Developers who wish to use the WMTS services will need to register an App Name in order to authenticate the API key in the following format:
+Developers who wish to use the online services will need to register for an API key in order to authenticate requests.
 
-APPLE_ID.BUNDLE_ID e.g. 12345678.com.example.find-a-postbox 
+When registering for an API Key we need to know a couple of items:
 
-Apple App ID: This is a numerical value that is unique for each iOS app and has to be created in Apple's iOS Provisioning portal.
-Bundle Identifier: This is the reverse domain name specified in Xcode, this is generated from the app name (how you name your project) and the company identifier specified. 
+* Bundle Identifier of the application using the API key
 
-#### Registration Process
+Let us know the Bundle Identifier of the Xcode project in which you will be using the API. This is available and configurable when creating an Xcode project or from project settings or `Info.plist`
+
+
+* Apple App ID to be associated with this application
+
+This ID is the unique Apple ID generated in iTunes Connect when creating a new iOS application for the Apple AppStore
+
+
+
+### Registration Process
 
 If you do not own a re-use data licence you can register for an API key to access [OS OpenSpace Pro] (https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/index.html) under a 90 day trial or a commercial re-use licence. 
 
@@ -39,14 +47,15 @@ If you own a data licence, for example, you are a member of the PSMA, you can re
 
 Copy the project to your local machine, eg:
 
-<pre>
+```bash
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
-</pre>
+```
 
 #### Download ordnancesurvey-ios-sdk
 
 - Download the latest ordnancesurvey-ios-sdk framework from [www.ordnancesurvey.co.uk](https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/ios-sdk.html)
  - Unzip the SDK into the `StaticFrameworks` directory at the root of the project
+ 
 <pre>
 $SRCROOT/StaticFrameworks
 </pre>
@@ -68,12 +77,12 @@ Copy the file into the `Resources` directory at the root of the project:
 
 The file is referenced in the project settings and defined in the demo application here:
 
-<pre>
+```objective-c
 //In MapViewController.m
 
 static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
-</pre>
+```
 
 #### Update demo app with your API Key and Bundle Identifier details
 
@@ -81,13 +90,13 @@ Copy and paste the API Key into the demo app
 
 Update the Bundle Identifier associated with the API Key
 
-<pre>
+```objective-c
 //In MapViewController.m
 
 static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
 static BOOL const kOSIsPro = YES;
 
-</pre>
+```
 
 #### Build and run
 
