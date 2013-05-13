@@ -74,7 +74,7 @@ Project can now be built and run - if you're using the simulator don't forget to
 Questions and Issues
 -------
 
-If you have any questions or issues with the openspace-ios-sdk or this demo app then please email openspacepro@ordnancesurvey.co.uk
+If you have any questions or issues with the openspace-ios-sdk or this demo app then please email osopenspace@ordnancesurvey.co.uk
 
 
 Licence
