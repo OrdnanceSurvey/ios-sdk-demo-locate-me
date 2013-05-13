@@ -22,7 +22,7 @@ This project requires the following points are met:
 
 #### Registration and Access
 
-[Register for an API key](https://github.com/OrdnanceSurvey/openspace-ios-sdk-registration-and-access)
+[How to Register](https://github.com/OrdnanceSurvey/openspace-ios-sdk#registration-and-access)
 
 #### Clone project
 
@@ -80,11 +80,11 @@ If you have any questions or issues with the ordnancesurvey-ios-sdk or this demo
 Licence
 -------
 
-The Ordnance Survey iOS SDK is protected by © Crown copyright – Ordnance
+The Ordnance Survey OpenSpace iOS SDK is protected by © Crown copyright – Ordnance
 Survey 2013. It is subject to licensing terms granted by Ordnance Survey, the
 national mapping agency of Great Britain.
 
-The Ordnance Survey iOS SDK includes the Route-Me library. The Route-Me
+The OpenSpace iOS SDK includes the Route-Me library. The Route-Me
 library is copyright (c) 2008-2013, Route-Me Contributors All rights reserved
 (subject to the BSD licence terms as follows):
 
