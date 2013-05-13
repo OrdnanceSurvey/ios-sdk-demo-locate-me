@@ -1,7 +1,7 @@
 Description
 ---
 
-A demo app using the ordnancesurvey-ios-sdk to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
+A demo app using the openspace-ios-sdk to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
 
 
 
