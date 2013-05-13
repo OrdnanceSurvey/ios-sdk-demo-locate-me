@@ -30,15 +30,15 @@ This project requires the following points are met:
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
 </pre>
 
-#### Download ordnancesurvey-ios-sdk
+#### Download openspace-ios-sdk
 
- - Download the latest ordnancesurvey-ios-sdk static framework TBC 
+ - Download the latest openspace-ios-sdk static framework TBD
  - Unzip into the project directory root
  <pre>
  $SRCROOT/StaticFrameworks
  </pre>
  
-#### Download ordnancesurvey-ios-sdk
+#### Download openspace-ios-sdk
 
 Build\Download the offline search database - TODO: define this process
 
@@ -55,7 +55,7 @@ static NSString *const kOSSearchDBFilename = @"YOUR_FILENAME_HERE.ospoi";
 
 Copy and paste the API Key and associated URL into the demo app
 
-Note: if using an OS OpenSpace Pro account then change kOSIsPro to TRUE
+Note: if using an OS OpenSpace Pro or OS OnDemand account then change kOSIsPro to TRUE
 
 <pre>
 //In MapViewController.m
@@ -74,7 +74,7 @@ Project can now be built and run - if you're using the simulator don't forget to
 Questions and Issues
 -------
 
-If you have any questions or issues with the ordnancesurvey-ios-sdk or this demo app then please email osopenspacepro@ordnancesurvey.co.uk
+If you have any questions or issues with the openspace-ios-sdk or this demo app then please email openspacepro@ordnancesurvey.co.uk
 
 
 Licence
