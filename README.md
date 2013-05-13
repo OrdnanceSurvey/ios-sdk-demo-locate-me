@@ -22,7 +22,7 @@ This project requires the following points are met:
 
 #### Registration and Access
 
-[See Getting Started](https://github.com/OrdnanceSurvey/openspace-ios-sdk)
+[Register for an API key](https://github.com/OrdnanceSurvey/openspace-ios-sdk-registration-and-access)
 
 #### Clone project
 
