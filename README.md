@@ -1,7 +1,7 @@
 Description
 ---
 
-A demo app using the ordnancesurvey-ios-sdk to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
+A demo app using the openspace-ios-sdk to display the user's location to make use of location services. Also includes an example of search functionality, allowing offline searches from Ordnance Survey's 50k Gazetteer, OS Locator and Code-Point Open datasets.
 
 
 
@@ -20,30 +20,11 @@ This project requires the following points are met:
 - iOS Openspace SDK version: TBC
 
 
-### Register for an API Key
+#### Registration and Access
 
-Developers who wish to use the online services will need to register for an API key in order to authenticate requests.
+In order to access and use the Service via the OpenSpace iOS-SDK, you must [apply for an API key.](https://github.com/OrdnanceSurvey/openspace-ios-sdk#getting-started)
 
-When registering for an API Key we need to know a couple of items:
-
-* Bundle Identifier of the application using the API key
-
-Let us know the Bundle Identifier of the Xcode project in which you will be using the API. This is available and configurable when creating an Xcode project or from project settings or `Info.plist`
-
-
-* Apple App ID to be associated with this application
-
-This ID is the unique Apple ID generated in iTunes Connect when creating a new iOS application for the Apple AppStore
-
-
-
-### Registration Process
-
-If you do not own a re-use data licence you can register for an API key to access [OS OpenSpace Pro] (https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/index.html) under a 90 day trial or a commercial re-use licence. 
-
-If you own a data licence, for example, you are a member of the PSMA, you can register for an API key to access [OSOnDemand WMTS] (http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-ondemand/pricing.html).
-
-#### Download project
+#### Clone project
 
 Copy the project to your local machine, eg:
 
@@ -51,16 +32,15 @@ Copy the project to your local machine, eg:
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
 ```
 
-#### Download ordnancesurvey-ios-sdk
+#### Download openspace-ios-sdk
 
-- Download the latest ordnancesurvey-ios-sdk framework from [www.ordnancesurvey.co.uk](https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/ios-sdk.html)
- - Unzip the SDK into the `StaticFrameworks` directory at the root of the project
+ - Download the latest openspace-ios-sdk static framework TBD
+ - Unzip into the project directory root
+ <pre>
+ $SRCROOT/StaticFrameworks
+ </pre>
  
-<pre>
-$SRCROOT/StaticFrameworks
-</pre>
- 
-#### Build Ordnance Survey POI database
+#### Download openspace-ios-sdk
 
 This project is configured to use the offline points of interest database containing the following Open datasets:
 
@@ -88,7 +68,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 Copy and paste the API Key into the demo app
 
-Update the Bundle Identifier associated with the API Key
+Change kOSIsPro to TRUE
 
 ```objective-c
 //In MapViewController.m
@@ -106,17 +86,17 @@ Project can now be built and run - if you're using the simulator don't forget to
 Questions and Issues
 -------
 
-If you have any questions or issues with the ordnancesurvey-ios-sdk or this demo app then please email osopenspacepro@ordnancesurvey.co.uk
+If you have any questions or issues with the openspace-ios-sdk or this demo app then please email osopenspace@ordnancesurvey.co.uk
 
 
 Licence
 -------
 
-The Ordnance Survey iOS SDK is protected by © Crown copyright – Ordnance
+The Ordnance Survey OpenSpace iOS SDK is protected by © Crown copyright – Ordnance
 Survey 2013. It is subject to licensing terms granted by Ordnance Survey, the
 national mapping agency of Great Britain.
 
-The Ordnance Survey iOS SDK includes the Route-Me library. The Route-Me
+The OpenSpace iOS SDK includes the Route-Me library. The Route-Me
 library is copyright (c) 2008-2013, Route-Me Contributors All rights reserved
 (subject to the BSD licence terms as follows):
 
