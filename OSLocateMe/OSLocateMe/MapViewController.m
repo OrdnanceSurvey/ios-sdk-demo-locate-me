@@ -12,8 +12,7 @@
  * Define your OS Openspace API KEY details below
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
-static NSString *const kOSApiKey = @"IOSSDK03";
-static NSString *const kOSAppleAppId = @"YOUR_APPLE_APP_ID";
+static NSString *const kOSApiKey = @"APIKEY";
 static BOOL const kOSIsPro = YES;
 static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
@@ -36,7 +35,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSAppleAppId openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         [_mapView setDelegate:self];
@@ -61,7 +60,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     }
     
     //This can be recreated when a search is requested and cancel a request if isGeocoding
-    if( osGeocoder && [osGeocoder isGeocoder] ){
+    if( osGeocoder && [osGeocoder isGeocoding] ){
         
         [osGeocoder cancelGeocode];
         
@@ -254,10 +253,10 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
             type = OSGeocodeTypeRoad;
             break;
         case 1:
-            type = OSGeocodeTypeGazetteer;
+            type = OSGeocodeTypeOnlineGazetteer;
             break;
         case 2:
-            type = OSGeocodeTypePostcode;
+            type = OSGeocodeTypeOnlinePostcode;
             break;
         default:
             type = OSGeocodeTypeCombined2;
@@ -272,12 +271,12 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     //create new instance of OSGeocoder if not instance existing already
     if( !osGeocoder ){
         
-        osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath];
+        osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath apiKey:kOSApiKey openSpacePro:YES];
         
     }else{
         
         //OSGeocoder does not support running multiple queries so cancel any that are in progress
-        if( [osGeocoder isGeocoder] )
+        if( [osGeocoder isGeocoding] )
         {
             [osGeocoder cancelGeocode];
         }
