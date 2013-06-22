@@ -34,13 +34,13 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
 
 #### Download openspace-ios-sdk
 
- - Download the latest openspace-ios-sdk static framework TBD
- - Unzip into the project directory root
+ - Download the latest [openspace-ios-sdk static framework](https://github.com/OrdnanceSurvey/openspace-ios-sdk#contents)
+ - Unzip into the `StaticFrameworks` directory under the project root
  <pre>
  $SRCROOT/StaticFrameworks
  </pre>
  
-#### Download openspace-ios-sdk
+#### Download Offline POI database
 
 This project is configured to use the offline points of interest database containing the following Open datasets:
 
@@ -50,7 +50,7 @@ This project is configured to use the offline points of interest database contai
 
 Please follow the guide [here](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk#poi-database) to build the POI database.
 
-Copy the file into the `Resources` directory at the root of the project:
+Copy the file into the `Resources` directory under the project root
 <pre>
  $SRCROOT/Resources
 </pre>
@@ -68,7 +68,9 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 Copy and paste the API Key into the demo app
 
-Change kOSIsPro to TRUE
+Update Bundle Identifier
+
+Change kIS_PRO appropriately
 
 ```objective-c
 //In MapViewController.m
