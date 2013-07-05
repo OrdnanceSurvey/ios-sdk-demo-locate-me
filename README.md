@@ -40,15 +40,15 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
  $SRCROOT/StaticFrameworks
  </pre>
  
-#### Download Offline POI database
+#### Download Offline Places Of Interest geocoder database
 
-This project is configured to use the offline points of interest database containing the following Open datasets:
+This project is configured to use the offline geocoder database containing the following OpenData datasets:
 
 - 1:50K Gazetteer
 - OS Locator
 - Codepoint Open datasets
 
-Please follow the guide [here](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk#poi-database) to build the POI database.
+Please follow the guide [here](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk#poi-database) to build the geocoder database.
 
 Copy the file into the `Resources` directory under the project root
 <pre>
