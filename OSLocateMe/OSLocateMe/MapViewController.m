@@ -13,7 +13,7 @@
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
 static NSString *const kOSApiKey = @"APIKEY";
-static BOOL const kOSIsPro = YES;
+static BOOL const kOSIsPro = NO;
 static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 
@@ -245,7 +245,11 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     //Define search type
     OSGeocodeType type;
     
-    //Get the search bar scope... and map to search type
+    /**
+     * Get the search bar scope... and map to search type.
+     *  This configuration uses the Online services for Gazetteer[1] & Postcodes[2]
+     *  and the local db.ospoi for Road names[1] and Gazetteer & Postcode combined[default]
+     */
     NSInteger buttonIndex = searchBar.selectedScopeButtonIndex;
     switch (buttonIndex)
     {
@@ -268,10 +272,10 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     NSURL *url = [[NSBundle mainBundle] URLForResource:kOSPoiDBFilename withExtension:nil];
     NSString *dbPath = [url path];
     
-    //create new instance of OSGeocoder if not instance existing already
+    //create new instance of OSGeocoder if necessary
     if( !osGeocoder ){
         
-        osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath apiKey:kOSApiKey openSpacePro:YES];
+        osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath apiKey:kOSApiKey openSpacePro:kOSIsPro];
         
     }else{
         
