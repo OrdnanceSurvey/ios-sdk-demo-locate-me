@@ -42,11 +42,18 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-locate-me.git
  
 #### Download Offline Places Of Interest geocoder database
 
-This project is configured to use the offline geocoder database containing the following OpenData datasets:
+This project is configured to use the following OS OpenData datasets from each service provider:
+
+##### Online service
 
 - 1:50K Gazetteer
-- OS Locator
 - Codepoint Open datasets
+
+##### Offline geocoder database
+
+- OS Locator
+
+
 
 Please follow the guide [here](https://github.com/OrdnanceSurvey/openspace-sdk-resources#places-of-interest-geocoder-database) to build the geocoder database.
 
