@@ -48,7 +48,7 @@ This project is configured to use the offline geocoder database containing the f
 - OS Locator
 - Codepoint Open datasets
 
-Please follow the guide [here](https://github.com/OrdnanceSurvey/ordnancesurvey-ios-sdk#places-of-interest-geocoder-database) to build the geocoder database.
+Please follow the guide [here](https://github.com/OrdnanceSurvey/openspace-sdk-resources#places-of-interest-geocoder-database) to build the geocoder database.
 
 Copy the file into the `Resources` directory under the project root
 <pre>
