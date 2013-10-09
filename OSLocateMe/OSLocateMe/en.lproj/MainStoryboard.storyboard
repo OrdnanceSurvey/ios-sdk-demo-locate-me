@@ -1,24 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lm9-Yc-Gua">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
-        <scene sceneID="5">
+        <scene sceneID="OOe-Hr-NxQ">
             <objects>
-                <viewController id="2" customClass="MapViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                <viewController id="Lm9-Yc-Gua" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZOc-HL-Ttz"/>
+                        <viewControllerLayoutGuide type="bottom" id="eQY-Vf-0Mo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V2w-9X-vh3" customClass="MapViewC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <userGuides>
+                            <userLayoutGuide location="160" affinity="minX"/>
+                        </userGuides>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdD-RS-TzJ" customClass="OSMapView">
+                            <searchBar contentMode="redraw" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nO-cp-czc">
+                                <rect key="frame" x="0.0" y="20" width="320" height="88"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="0.82000000000000006" alpha="1" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Roads</string>
+                                    <string>Placenames</string>
+                                    <string>Postcodes</string>
+                                    <string>Combined</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUu-m4-ZSB" customClass="OSMapView">
+                                <rect key="frame" x="0.0" y="108" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZd-RT-6b0">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HpD-4H-snl">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.82000000000000006" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem title="Locate Me" id="W0W-yx-c8Q">
+                                        <connections>
+                                            <action selector="locateMeTapped:" destination="Lm9-Yc-Gua" id="QlG-lA-4ph"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="0.82000000000000006" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9n-Zb-jfa">
+                                <rect key="frame" x="0.0" y="108" width="320" height="76"/>
                                 <color key="backgroundColor" red="0.043478251000000002" green="0.043478251000000002" blue="0.043478251000000002" alpha="0.69999999000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="u1p-3g-zfB"/>
+                                    <constraint firstAttribute="height" constant="76" id="GKZ-WT-pxI"/>
                                 </constraints>
                                 <string key="text">/*
  * You are: 
@@ -29,51 +64,34 @@
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRf-Na-MKj">
-                                <items>
-                                    <barButtonItem title="Locate Me" id="L5P-GP-2UI">
-                                        <connections>
-                                            <action selector="locateMeTapped:" destination="2" id="8HC-tw-sk7"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <searchBar contentMode="redraw" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jnj-xW-j3B">
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Roads</string>
-                                    <string>Placenames</string>
-                                    <string>Postcodes</string>
-                                    <string>Combined</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.82272401147959184" green="0.82272401147959184" blue="0.82272401147959184" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="SRf-Na-MKj" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="9Al-kS-aSw"/>
-                            <constraint firstItem="Jnj-xW-j3B" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="Ezv-NX-qdL"/>
-                            <constraint firstItem="Jnj-xW-j3B" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="F5O-qY-Ctv"/>
-                            <constraint firstItem="Jnj-xW-j3B" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="W1g-5q-dIo"/>
-                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Xwr-3K-fp2"/>
-                            <constraint firstItem="nZd-RT-6b0" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="alr-uN-wDZ"/>
-                            <constraint firstItem="SRf-Na-MKj" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="bjA-LT-GTu"/>
-                            <constraint firstItem="SRf-Na-MKj" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="oSJ-EA-g37"/>
-                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="bottom" secondItem="SRf-Na-MKj" secondAttribute="top" type="default" id="pgX-BU-zsK"/>
-                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="tuV-2C-h6G"/>
-                            <constraint firstItem="fdD-RS-TzJ" firstAttribute="top" secondItem="Jnj-xW-j3B" secondAttribute="bottom" type="default" id="vff-Gh-RNU"/>
-                            <constraint firstItem="nZd-RT-6b0" firstAttribute="top" secondItem="fdD-RS-TzJ" secondAttribute="top" type="default" id="xSw-yQ-kaA"/>
-                            <constraint firstItem="nZd-RT-6b0" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="yYi-Rm-XFR"/>
+                            <constraint firstItem="HpD-4H-snl" firstAttribute="leading" secondItem="V2w-9X-vh3" secondAttribute="leading" id="4hb-am-0tG"/>
+                            <constraint firstItem="6nO-cp-czc" firstAttribute="leading" secondItem="oUu-m4-ZSB" secondAttribute="leading" id="7qf-M0-Ypz"/>
+                            <constraint firstItem="HpD-4H-snl" firstAttribute="top" secondItem="oUu-m4-ZSB" secondAttribute="bottom" id="8Ia-gP-uKu"/>
+                            <constraint firstAttribute="bottom" secondItem="HpD-4H-snl" secondAttribute="bottom" id="E0x-ag-oh1"/>
+                            <constraint firstItem="HpD-4H-snl" firstAttribute="trailing" secondItem="oUu-m4-ZSB" secondAttribute="trailing" id="KPy-y8-kfK"/>
+                            <constraint firstItem="Y9n-Zb-jfa" firstAttribute="leading" secondItem="V2w-9X-vh3" secondAttribute="leading" id="NH4-s7-X9w"/>
+                            <constraint firstItem="oUu-m4-ZSB" firstAttribute="top" secondItem="6nO-cp-czc" secondAttribute="bottom" id="ORm-sE-FiQ"/>
+                            <constraint firstItem="Y9n-Zb-jfa" firstAttribute="top" secondItem="6nO-cp-czc" secondAttribute="bottom" id="U3T-AF-n15"/>
+                            <constraint firstItem="HpD-4H-snl" firstAttribute="leading" secondItem="oUu-m4-ZSB" secondAttribute="leading" id="Zye-hE-8PH"/>
+                            <constraint firstAttribute="trailing" secondItem="oUu-m4-ZSB" secondAttribute="trailing" id="k8b-Ar-hgy"/>
+                            <constraint firstItem="oUu-m4-ZSB" firstAttribute="trailing" secondItem="6nO-cp-czc" secondAttribute="trailing" id="sF7-eo-bmf"/>
+                            <constraint firstAttribute="trailing" secondItem="Y9n-Zb-jfa" secondAttribute="trailing" id="tPn-s2-I4t"/>
+                            <constraint firstItem="6nO-cp-czc" firstAttribute="top" secondItem="V2w-9X-vh3" secondAttribute="top" constant="20" id="yzP-G2-aIA"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="locateMeBtn" destination="L5P-GP-2UI" id="jMs-kT-nmP"/>
-                        <outlet property="mapView" destination="fdD-RS-TzJ" id="966-5y-d4j"/>
-                        <outlet property="searchBar" destination="Jnj-xW-j3B" id="0TN-ll-ksR"/>
-                        <outlet property="textView" destination="nZd-RT-6b0" id="w7F-xW-HZe"/>
+                        <outlet property="locateMeBtn" destination="W0W-yx-c8Q" id="nSa-5V-ryY"/>
+                        <outlet property="mapView" destination="oUu-m4-ZSB" id="FBp-7y-zT0"/>
+                        <outlet property="searchBar" destination="6nO-cp-czc" id="0aH-dd-MbJ"/>
+                        <outlet property="textView" destination="Y9n-Zb-jfa" id="lvH-FO-2YG"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YSC-fS-gTz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="38" y="-180"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
