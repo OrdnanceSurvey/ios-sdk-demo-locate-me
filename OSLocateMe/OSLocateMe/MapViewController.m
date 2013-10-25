@@ -8,12 +8,18 @@
 
 #import "MapViewController.h"
 
-/*
- * Define your OS Openspace API KEY details below
+/**
+ * This API Key is registered for this application.
+ *
+ * Define your own OS Openspace API KEY details below
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
-static NSString *const kOSApiKey = @"APIKEY";
+static NSString *const kOSApiKey = @"E2BE1E5D60273BF3E0430B6CA40ACE3B";
 static BOOL const kOSIsPro = NO;
+
+/**
+ * The name of the Offline gazetteer search database
+ */
 static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 
@@ -44,7 +50,6 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
         
         NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
     }
-    
     
 }
 

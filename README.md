@@ -47,12 +47,12 @@ This project is configured to use the following OS OpenData datasets from each s
 ##### Online service
 
 - 1:50K Gazetteer
-- Codepoint Open datasets
+- Code-Point Open
 
 ##### Offline geocoder database
 
+- As above
 - OS Locator
-
 
 
 Please follow the guide [here](https://github.com/OrdnanceSurvey/openspace-sdk-resources#places-of-interest-geocoder-database) to build the geocoder database.
@@ -71,21 +71,9 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 ```
 
-#### Update demo app with your API Key and Bundle Identifier details
+#### API Key
 
-Copy and paste the API Key into the demo app
-
-Update Bundle Identifier
-
-Change kIS_PRO appropriately
-
-```objective-c
-//In MapViewController.m
-
-static NSString *const kOSApiKey = @"YOUR_KEY_HERE";
-static BOOL const kOSIsPro = YES;
-
-```
+An OS OpenSpace Free API key has been pre-registered for this application and is present in this project code, the app can be used straight away. 
 
 #### Build and run
 
