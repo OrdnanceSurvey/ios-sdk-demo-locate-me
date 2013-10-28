@@ -73,7 +73,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 #### API Key
 
-An OS OpenSpace Free API key has been pre-registered for this application and is present in this project code, the app can be used straight away. 
+An OS OpenSpace Free API key has been pre-registered for this application and is present in this project code so that the app can be used straight away. 
 
 #### Build and run
 
