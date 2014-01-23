@@ -24,8 +24,8 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 
 
-@interface MapViewController () <OSMapViewDelegate, UISearchBarDelegate>
-{
+@interface MapViewController () <OSMapViewDelegate, UISearchBarDelegate> {
+    
     OSGeocoder * osGeocoder;
 }
 
@@ -33,34 +33,31 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 @implementation MapViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.searchBar.delegate = self;
     
-    {
-        //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
-        _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
-        
-        [_mapView setDelegate:self];
-        
-        _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        
-        NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
-    }
+    //create web tile source with API details
+    id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
+    _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
+    
+    [_mapView setDelegate:self];
+    
+    _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    
+    NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
     
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
     //Stop tracking user location
-    if( _mapView.showsUserLocation )
-    {
+    if( _mapView.showsUserLocation ) {
         _mapView.showsUserLocation = NO;
     }
     
@@ -76,14 +73,12 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 /*
  * display an NSArray of placemarks
  */
--(void)displaySearchResults:(NSArray*)placemarks
-{
+-(void)displaySearchResults:(NSArray*)placemarks {
 
     //remove all OSPlacemark annotations
     for ( id<OSAnnotation>annotation in _mapView.annotations ) {
         
-        if ( [annotation isKindOfClass:[OSPlacemark class]] )
-        {
+        if ( [annotation isKindOfClass:[OSPlacemark class]] ) {
             [_mapView removeAnnotation:annotation];
         }
         
@@ -96,21 +91,21 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 /*
  * handle OSGeocoder errors
  */
--(void)showAlertForError:(NSError*)error
-{
-    if ( !error )
-    {
+-(void)showAlertForError:(NSError*)error {
+    
+    if ( !error ) {
         return;
     }
-    NSString * errorTitle = nil;
-    NSString * errorMessage = nil;
+    
+    NSString * errorTitle, *errorMessage = nil;
 
-    if ( [error.domain isEqualToString:OSGeocoderErrorDomain] )
-    {
+    if ( [error.domain isEqualToString:OSGeocoderErrorDomain] ) {
         switch (error.code) {
+                
             case OSGeocoderErrorNoResults:
                 errorTitle = NSLocalizedString(@"No results found", nil);
                 break;
+                
             case OSGeocoderErrorCancelled:
                 // Nothing to do here.
                 NSLog(@"Geocode cancelled");
@@ -118,18 +113,18 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
         }
     }
     
-    if ( !errorTitle )
-    {
+    if ( !errorTitle ) {
         errorTitle = error.localizedDescription;
         errorMessage = error.localizedFailureReason;
     }
+    
     [[[UIAlertView alloc] initWithTitle:errorTitle message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
 }
 
 #pragma mark IBAction methods
 
-- (IBAction)locateMeTapped:(id)sender
-{
+- (IBAction)locateMeTapped:(id)sender {
+    
     //toggle displaying user location
     _mapView.showsUserLocation = !_mapView.showsUserLocation;
 }
@@ -139,43 +134,37 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 #pragma mark OSMapViewDelegate methods
 
 
--(void)mapViewWillStartLocatingUser:(OSMapView *)mv
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+-(void)mapViewWillStartLocatingUser:(OSMapView *)mv {
     
-    bool showsUserLocation = 1;
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     //toggle button style to show selected/not selected
-    _locateMeBtn.style = ( showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered );
+    _locateMeBtn.style = UIBarButtonItemStyleDone;
 
 }
--(void)mapViewDidStopLocatingUser:(OSMapView *)mv
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+-(void)mapViewDidStopLocatingUser:(OSMapView *)mv {
     
-    bool showsUserLocation = 0;
-    _locateMeBtn.style = ( showsUserLocation ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered );
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    _locateMeBtn.style = UIBarButtonItemStylePlain;
 
 }
 
--(void)mapView:(OSMapView *)mv didChangeUserTrackingMode:(OSUserTrackingMode)mode animated:(BOOL)animated
-{
+-(void)mapView:(OSMapView *)mv didChangeUserTrackingMode:(OSUserTrackingMode)mode animated:(BOOL)animated {
+    
     NSLog(@"%s %d %d", __PRETTY_FUNCTION__, mode, animated);
     
     //do nothing with this delegate method at the moment
 
 }
 
-- (void)mapView:(OSMapView *)mapView didUpdateUserLocation:(OSUserLocation *)userLocation
-{
+- (void)mapView:(OSMapView *)mapView didUpdateUserLocation:(OSUserLocation *)userLocation {
     
     //update display
     OSGridPoint gp = OSGridPointForCoordinate(userLocation.coordinate);
     NSString * gridRef = NSStringFromOSGridPoint(gp, 4);
     
     //test if point is within GB
-    if( !OSGridPointIsWithinBounds(gp) )
-    {
+    if( !OSGridPointIsWithinBounds(gp) ) {
         gridRef = @"Invalid";
         gp = OSGridPointInvalid;
     }
@@ -190,18 +179,16 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     
 }
 
--(OSAnnotationView*)mapView:(OSMapView *)mapView viewForAnnotation:(id<OSAnnotation>)annotation
-{
+-(OSAnnotationView*)mapView:(OSMapView *)mapView viewForAnnotation:(id<OSAnnotation>)annotation {
+    
     // Use the default user location view.
-    if ( [annotation isKindOfClass:[OSUserLocation class]] )
-    {
+    if ( [annotation isKindOfClass:[OSUserLocation class]] ) {
         return nil;
     }
     
     //differentiate between standard annotion and placemark annotation
     OSPinAnnotationColor pinColor = OSPinAnnotationColorRed;
-    if ( [annotation isKindOfClass:[OSPlacemark class]] )
-    {
+    if ( [annotation isKindOfClass:[OSPlacemark class]] ) {
         pinColor = OSPinAnnotationColorPurple;
     }
     
@@ -216,13 +203,13 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
 
 #pragma mark <UISearchBarDelegate>
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    
     [searchBar setShowsCancelButton:YES animated:YES];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
     searchBar.text = @"";
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
@@ -230,8 +217,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     //remove OSPlacemark annotations
     for ( id<OSAnnotation>annotation in _mapView.annotations ) {
         
-        if ( [annotation isKindOfClass:[OSPlacemark class]] )
-        {
+        if ( [annotation isKindOfClass:[OSPlacemark class]] ) {
             [_mapView removeAnnotation:annotation];
         }
         
@@ -239,8 +225,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     
 }
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
@@ -256,8 +241,8 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
      *  and the local db.ospoi for Road names[1] and Gazetteer & Postcode combined[default]
      */
     NSInteger buttonIndex = searchBar.selectedScopeButtonIndex;
-    switch (buttonIndex)
-    {
+    switch (buttonIndex) {
+            
         case 0:
             type = OSGeocodeTypeRoad;
             break;
@@ -278,15 +263,14 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     NSString *dbPath = [url path];
     
     //create new instance of OSGeocoder if necessary
-    if( !osGeocoder ){
+    if( !osGeocoder ) {
         
         osGeocoder  = [[OSGeocoder alloc] initWithDatabase:dbPath apiKey:kOSApiKey openSpacePro:kOSIsPro];
         
     }else{
         
         //OSGeocoder does not support running multiple queries so cancel any that are in progress
-        if( [osGeocoder isGeocoding] )
-        {
+        if( [osGeocoder isGeocoding] ) {
             [osGeocoder cancelGeocode];
         }
         
@@ -297,7 +281,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     //We need a OSGridRect to search in, if we're showing the user location then
     // get a GridRect close to user, if not then use the whole country
     OSGridRect rect;
-    if( _mapView.showsUserLocation ){
+    if( _mapView.showsUserLocation ) {
         
         /*
          * Define how large the local search GridRect will be
@@ -326,8 +310,8 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
             completionHandler:^(NSArray *placemarks, NSError *error) {
         
         [self showAlertForError:error];
-        if ( [placemarks count] )
-        {
+                
+        if ( [placemarks count] ) {
             [self displaySearchResults:placemarks];
         }
         
