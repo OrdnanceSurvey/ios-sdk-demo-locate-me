@@ -15,8 +15,8 @@ Getting started
 
 This project requires the following points are met:
 
-- Minimum iOS platform version: 6.0.1
-- Xcode version: 5
+- Minimum iOS platform version: 7.0.3
+- Xcode version: 5.0
 - Minimum Openspace iOS SDK version: v1.0.5
 
 
