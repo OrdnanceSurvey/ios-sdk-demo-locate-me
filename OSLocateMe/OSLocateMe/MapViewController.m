@@ -45,7 +45,7 @@ static NSString *const kOSPoiDBFilename = @"db.ospoi";
     
     [_mapView setDelegate:self];
     
-    _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    [_mapView setRegion: OSCoordinateRegionForGridRect(OSNationalGridBounds)];
     
     NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
     
